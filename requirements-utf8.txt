@@ -1,0 +1,41 @@
+﻿# ===========================================
+# MiroFish Backend Dependencies (UTF-8)
+# ===========================================
+# Python 3.11+ required
+# Usage: pip install -r requirements-utf8.txt
+# ===========================================
+
+# Core framework
+flask>=3.0.0
+flask-cors>=6.0.0
+
+# LLM - OpenAI SDK (unified OpenAI-format LLM calls)
+openai>=1.0.0
+
+# Zep Cloud
+zep-cloud==3.13.0
+
+# OASIS social media simulation framework
+camel-oasis==0.2.5
+camel-ai==0.2.78
+
+# File processing
+PyMuPDF>=1.24.0
+charset-normalizer>=3.0.0
+chardet>=5.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+
+# Additional packages used by boi-rsu scripts
+apify-client
+requests
+colorama
+pillow
+reportlab
+fpdf
+qrcode
+schedule
+google-genai
+
