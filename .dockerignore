@@ -1,0 +1,35 @@
+# Keep the build context small and never bake secrets into the image.
+.git
+.gitignore
+.github
+.vscode
+.idea
+
+# Secrets - the real .env must never reach the image
+.env
+.env.*
+!.env.example
+*.bak
+
+# Python cruft
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+.eggs/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime data (recreated at container start)
+logs/
+uploads/
+cache/
+data/
+*.log
+test_output/
+test_output_both/
+test_with_voice/

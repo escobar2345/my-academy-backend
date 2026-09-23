@@ -34,7 +34,9 @@ requests
 colorama
 pillow
 reportlab
-fpdf
+# fpdf2 (NOT the ancient PyFPDF "fpdf"): textbook_v2.py uses
+# `from fpdf.enums import XPos, YPos`, which only exists in fpdf2.
+fpdf2>=2.7
 qrcode
 schedule
 google-genai
