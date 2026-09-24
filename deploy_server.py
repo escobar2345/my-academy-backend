@@ -10,8 +10,9 @@ ONE process on ONE port ($PORT):
     /api/auth/*      -> partner_auth.py  (parent + partner login)
     /api/{ai,stream,students,student,attendance,assignment,careers,
           roadmap,progress,paystack,textbooks,classroom,timetable,
-          start-ai-class,videos}
-                     -> api_server.py    (classroom, AI, payments, textbooks)
+          start-ai-class,videos,portal,library}
+                     -> api_server.py    (classroom, AI, payments, textbooks,
+                                          school-portal DB, student library)
     /api/* , /health -> main boirsu app  (run.py create_app)
     everything else  -> the built frontend (frontend/dist) with an
                         index.html fallback (vue-router history mode)
@@ -68,6 +69,13 @@ API_SERVER_PREFIXES = (
     "/api/timetable",
     "/api/start-ai-class",
     "/api/videos",
+    # School-portal PostgreSQL bridge (src/lib/pgdb.js -> /api/portal/*) and the
+    # student library (boi-school/aiClient.js -> /api/library/*). Both are
+    # defined ONLY in api_server.py, so without these two entries they fell
+    # through to the main app, which has no such routes -> 404 in production.
+    # (Locally they worked because vite.config.js proxies them to :5055.)
+    "/api/portal",
+    "/api/library",
 )
 
 # ---- Static frontend (built by `npm run build` into frontend/dist) ----
