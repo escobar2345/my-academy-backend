@@ -1756,7 +1756,21 @@ _classroom_lock = threading.Lock()
 
 
 def _classroom_room_key(course: str) -> str:
-    return re.sub(r"\s+", " ", (course or "").strip()).lower() or "general"
+    """
+    Canonical room key for the live classroom + cohort chat. ONE ROOM PER COURSE.
+
+    Separators are folded, because the same course is recorded inconsistently in
+    the students store: 'frontend-developer' and 'frontend_developer' are both
+    "Frontend Web Development". Keyed on the raw string they became two rooms and
+    those students silently never saw each other's messages -- the cohort was
+    split in half. Folding makes every spelling of a course land in one room,
+    while different courses stay fully separate.
+
+    Clients mirror this in normRoom() (Classroom.vue, studentdashboard.vue) so
+    their SSE event filter compares like with like.
+    """
+    key = re.sub(r"[\s_-]+", "-", (course or "").strip().lower()).strip("-")
+    return key or "general"
 
 
 def _classroom_get(room: str) -> dict:
